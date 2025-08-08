@@ -11,7 +11,6 @@ const Search = () => {
 
   const {searchUsers}= useSelector(state=> state.user)
 
-  console.log(searchUsers);
   
   const onSearch = (e) => {
     e.preventDefault()
@@ -61,7 +60,8 @@ const Search = () => {
         ):(
           <>
               {searchUsers.map((user, idx) => (
-          <div
+          <div 
+          onClick={()=> navigate(`/profile/${user._id}`)}
             key={idx}
             className="flex items-center gap-4 bg-base-200 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
           >

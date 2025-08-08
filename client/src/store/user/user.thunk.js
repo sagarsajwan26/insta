@@ -97,6 +97,20 @@ return rejectWithValue(error.response.data)
         }
 })
 
+export const getOtherUserProfile= createAsyncThunk('/user/getOtherUsersProfile',async(id,{rejectWithValue})=>{
+    const token = localStorage.getItem('accessToken')
+    if(!token) return rejectWithValue('no token') 
+        try {
+            const res= await axiosInstance.get(`/users/getOtherUsersProfile/${id}`,{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            })
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+            
+        }
+})
 
 // export const getUserProfile= createAsyncThunk("/user/getProfile",async(_,{rejectWithValue})=>{
 // const token =localStorage.getItem('accessToken') 

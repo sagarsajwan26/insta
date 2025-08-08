@@ -178,6 +178,25 @@ export const getSearchUser= asyncHandler(async(req,res)=>{
   return res.status(200).json(new ApiResponse(200, "user found", user))
 
 })
+export const getOtherUserProfile = asyncHandler(async(req,res)=>{
+  const limit = req.query.limit || 10
+  const skip= req.query.skip || 0
+  const {id:userId}= req.params 
+  if(!userId) return res.status(400).json({message:"user id is required"}) 
+    const user= await User.findById(userId).populate({
+      path:"posts",
+      options:{
+        sort:{createdAt:-1},
+        limit:limit,
+        skip:skip
+      }
+    }).lean()
+  if(!user) return res.status(404).json({message:"user not found"}) 
+    return res.status(200).json(new ApiResponse(200, "user found", user)) 
+})
+
+
+
 // export const getUserProfile= asyncHandler(async(req,res)=>{
 //   const user= await User.findOne({_id:req.user.id})
 //   if(!user) return res.status(404).json({message:"user not found"})

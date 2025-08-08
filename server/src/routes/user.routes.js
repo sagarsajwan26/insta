@@ -1,5 +1,5 @@
 import Router from 'express'
-import { followUnfollowUser,  getSearchUser,  logout, updateProfilePic, updateUser, userLogin, userSignup, verifyEmail } from '../controllers/user.controller.js'
+import { followUnfollowUser,  getOtherUserProfile,  getSearchUser,  logout, updateProfilePic, updateUser, userLogin, userSignup, verifyEmail } from '../controllers/user.controller.js'
 import { userAuth } from '../middleware/authMiddleware.js'
 import { upload } from '../middleware/multer.middleware.js'
 
@@ -14,6 +14,7 @@ router.route('/updateUserInfo').put(userAuth,updateUser)
 router.route('/updateProfilePic').put(userAuth,upload.single('avatar'),updateProfilePic)
 router.route('/follow/:id').put(userAuth,followUnfollowUser)
 router.route('/searchUser').get(userAuth, getSearchUser)
+router.route('/getOtherUsersProfile/:id').get(userAuth, getOtherUserProfile)
 
 
 
