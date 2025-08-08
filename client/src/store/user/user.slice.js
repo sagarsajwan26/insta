@@ -43,9 +43,9 @@ builder.addCase(UpdateProfilePic.fulfilled,(state,action)=>{
 })
 
 builder.addCase(updataUserInfo.fulfilled,(state, action)=>{
-  console.log(action.payload);
+//   console.log(action.payload);
   
-    // state.userData=action.payload.data.userData
+    state.userData=action.payload.data
 })
 
 

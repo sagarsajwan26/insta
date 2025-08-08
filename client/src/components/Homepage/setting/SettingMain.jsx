@@ -11,7 +11,12 @@ const SettingMain = () => {
     const [loading, setLoading]= useState(false)
     
       const { userData } = useSelector(state => state.user)
-    const [bio, setBio] = useState(userData?.bio || '')
+    
+   
+    const [updateData,setUpdateData]= useState({
+        username:userData?.username || '',
+        bio:userData?.bio || ''
+    })
 
   const languages = [
     "English", "Spanish", "French", "German", "Chinese", "Japanese", "Arabic", "Hindi", "Russian", "Portuguese"
@@ -34,16 +39,32 @@ const SettingMain = () => {
     { text: "Meta Verified", to: "/setting/meta-verified" }
   ]
 
-
+const handleValueChange= (e)=>{
+ 
+    
+const {id , value} = e.target
+setUpdateData(prev=>({...prev,[id]:value}))
+}
   const updateBio = (e) => {
     e.preventDefault()
-    dispatch(updataUserInfo(bio)).then(res=>{
-        console.log(res);
-        
+setLoading(true)
+    dispatch(updataUserInfo(updateData)).then(res=>{
+    if(res.payload.status==200){
+        toast.success(res.payload.message)
+        setLoading(false)
+    }        
+    else if(res?.meta?.rejectedWithValue){
+        toast.warning(res.payload.message || "Updation failed")
+        setLoading(false)
+    }
+    else{
+        toast.error('Internal server error')
+    }
     })
 
 
   }
+
    const handlePic= (e)=>{
   
     
@@ -53,7 +74,6 @@ const SettingMain = () => {
        
         const fileSize= (Math.floor(file.size /(1024*1024)))
        
-        console.log(fileSize);
         
         if(fileSize >=5) return toast.error(`Your current file size is ${fileSize} Mb it should be less than 4Mb `)
         
@@ -66,7 +86,7 @@ const SettingMain = () => {
             dispatch(UpdateProfilePic(form)).then(res=>{
                 
                 if(res?.payload?.status==200){
-                    console.log(res)
+                  
                     
                     toast.success(res.payload.message)
                     setLoading(false)
@@ -150,14 +170,27 @@ onChange={(e)=>handlePic(e)}
       </section>
 
       <form onSubmit={updateBio} className="space-y-6 mb-10">
+     <div className="form-control w-full flex flex-col gap-5">
+          <label htmlFor="username" className="label">
+            <span className="label-text text-2xl font-bold text-white">Username</span>
+          </label>
+          <input 
+            type='text'
+            id="username"
+            value={updateData.username}
+            onChange={(e) => handleValueChange(e) }
+            placeholder="Type Username "
+            className="input input-bordered bg-base-200 w-full"
+  />
+        </div>
         <div className="form-control w-full flex flex-col gap-5">
           <label htmlFor="bio" className="label">
             <span className="label-text text-2xl font-bold text-white">Bio</span>
           </label>
           <textarea
             id="bio"
-            value={bio}
-            onChange={(e) => setBio(e.target.value) }
+            value={updateData.bio}
+            onChange={(e) => handleValueChange(e) }
             placeholder="Write something about yourself..."
             className="textarea textarea-bordered resize-none h-28 bg-base-200 w-full"
           />
@@ -194,7 +227,9 @@ onChange={(e)=>handlePic(e)}
 
         <div className='w-full flex justify-end items-center'>
           <button type="submit" className="btn btn-primary w-full max-w-xs">
-            Submit
+            {
+    loading? 'updating Info':"Submit"
+}
           </button>
         </div>
       </form>

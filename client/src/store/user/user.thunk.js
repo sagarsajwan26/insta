@@ -85,7 +85,7 @@ export const updataUserInfo= createAsyncThunk('/users/updateUserInfo',async(data
     const token = localStorage.getItem('accessToken')
     if(!token) return rejectWithValue('no token')
         try {
-            const res= await axiosInstance.put('/users/updateUser',data,{
+            const res= await axiosInstance.put('/users/updateUserInfo',data,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -93,8 +93,7 @@ export const updataUserInfo= createAsyncThunk('/users/updateUserInfo',async(data
             return res.data 
         } catch (error) {   
             
-            console.log(error);
-            
+return rejectWithValue(error.response.data)            
         }
 })
 
