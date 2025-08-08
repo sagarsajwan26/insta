@@ -185,12 +185,15 @@ export const getOtherUserProfile = asyncHandler(async(req,res)=>{
   if(!userId) return res.status(400).json({message:"user id is required"}) 
     const user= await User.findById(userId).populate({
       path:"posts",
-      options:{
-        sort:{createdAt:-1},
-        limit:limit,
-        skip:skip
-      }
+  
+  options:{
+    limit,
+    skip,
+    sort:{createdAt:-1}
+  }
     }).lean()
+  console.log(user);
+  
   if(!user) return res.status(404).json({message:"user not found"}) 
     return res.status(200).json(new ApiResponse(200, "user found", user)) 
 })

@@ -12,7 +12,7 @@ useEffect(()=>{
 
   return (
     <div className="flex min-h-screen w-full bg-base-100 gap-4">
-      <div className="hidden md:block w-0 md:w-56">
+      <div className=" md:block w-0 md:w-56">
         <MenuSidebar />
       </div>
     

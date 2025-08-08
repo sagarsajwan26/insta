@@ -9,7 +9,7 @@ const userSchema = new Schema({
   password: { type: String, required: true, select:false },
   bio:      { type: String, default: '' },
   avatarUrl:{ type: String, default: '' },
-  posts: [{ type: Schema.Types.ObjectId, ref: 'Posts',default:[] }],
+  posts: [{ type: Schema.Types.ObjectId, ref: 'Post',default:[] }],
   isEmailVerified:{
 type:Boolean,
     default:false
