@@ -32,7 +32,7 @@ const App = () => {
         <Route path='/notification' element={<Notifications/>}/>
         <Route path='/profile' element={<Profile/>} />
         <Route path='/search' element={<Search />} />
-        <Route path='/profile/:id' element={<OtherUserProfile/>}/>
+        <Route path='/Usersprofile/:id' element={<OtherUserProfile/>}/>
         <Route path='/setting' element={<Setting/>}>
             <Route index element={<SettingMain/>}/>
             <Route path='notification' element={<SettingNotification/>}/>

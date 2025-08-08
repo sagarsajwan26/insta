@@ -192,7 +192,6 @@ export const getOtherUserProfile = asyncHandler(async(req,res)=>{
     sort:{createdAt:-1}
   }
     }).lean()
-  console.log(user);
   
   if(!user) return res.status(404).json({message:"user not found"}) 
     return res.status(200).json(new ApiResponse(200, "user found", user)) 

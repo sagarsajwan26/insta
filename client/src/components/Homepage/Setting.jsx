@@ -4,13 +4,13 @@ import { Outlet } from 'react-router'
 
 const Setting = () => {
   return (
-    <div className='w-full h-screen grid grid-cols-4' >
-      <div className='col-span-1 '>
+    <div className='w-full h-screen flex flex-col lg:flex-row' >
+      <div className='lg:w-80 flex-shrink-0'>
         <SettingSidebar/>
       </div>
-    <div className="col-span-3 ">
+      <div className="flex-1 overflow-hidden">
         <Outlet/>
-    </div>
+      </div>
     </div>
   )
 }
