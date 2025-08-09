@@ -92,10 +92,10 @@ export const getUserPosts = asyncHandler(async (req, res) => {
     .skip(skip)
     .sort({ createdAt: -1 })
     .lean();
-
+const count= await Post.countDocuments()
   return res
     .status(200)
-    .json(new ApiResponse(200, "Posts fetched successfully", posts));
+    .json(new ApiResponse(200, "Posts fetched successfully", {posts, count}));
 });
 
 export const likePost = asyncHandler(async (req, res) => {

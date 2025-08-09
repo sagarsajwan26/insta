@@ -40,6 +40,9 @@ export const getUserPosts= createAsyncThunk('/user/getUserPosts',async()=>{
 
 export const getAllPosts= createAsyncThunk('/user/getAllPosts',async()=>{
   const token = localStorage.getItem('accessToken')
+
+  console.log('hi');
+  
   try {
     const res= await axiosInstance.get('/post/getAllPosts',{
       headers:{

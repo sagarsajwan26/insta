@@ -3,7 +3,8 @@ import { getAllPosts, getUserPosts, likePost } from "./post.thunk"
 
 const initialState={
     loginUserPosts:[],
-    allPosts:null
+    allPosts:null,
+    countPost:0
     
 }
 const postSlice= createSlice({
@@ -18,6 +19,8 @@ const postSlice= createSlice({
             
         })
         builder.addCase(getAllPosts.fulfilled, (state,action)=>{
+            console.log(action.payload);
+            
             state.allPosts= action.payload.data
         })
 

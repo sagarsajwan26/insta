@@ -1,8 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteComment } from '../../../../store/comment/comment.thunk'
+import { setSelectedCommentForUpdate } from '../../../../store/comment/comment.slice'
 
-const SingleComment = ({ comment }) => {
+const SingleComment = ({ comment,setAddOrUpdateState }) => {
   const dispatch= useDispatch()
   const { userData } = useSelector(state => state.user)
 
@@ -45,7 +46,12 @@ const SingleComment = ({ comment }) => {
           </button>
           <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-40 space-y-1">
             <li>
-              <button className="btn btn-secondary btn-sm w-full text-white">Edit</button>
+              <button 
+              onClick={()=>{
+                dispatch(setSelectedCommentForUpdate(comment))
+                setAddOrUpdateState(false)
+              }}
+              className="btn btn-secondary btn-sm w-full text-white">Edit</button>
             </li>
             <li>
               <button onClick={()=> dispatch(deleteComment(comment._id)) } className="btn btn-error btn-sm w-full text-white">Delete</button>

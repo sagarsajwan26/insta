@@ -39,7 +39,7 @@ export const deleteComment= createAsyncThunk('/post/deleteComment',async(id, {re
         Authorization:`Bearer ${token}`
       }
     })
-    console.log(res);
+    // console.log(res);
     
     return res.data.data
   } catch (error) {
@@ -47,11 +47,11 @@ export const deleteComment= createAsyncThunk('/post/deleteComment',async(id, {re
   }
 })
 
-export const editComment= createAsyncThunk('/user/editComment',async(data,{rejectWithValue})=>{
+export const editComment= createAsyncThunk('/user/updateComment',async(data,{rejectWithValue})=>{
   const token=  localStorage.getItem('accessToken')
   if(!token) return rejectWithValue('No token found')
     try {
-      const res= await axiosInstance.put('/user/editComment',data,{
+      const res= await axiosInstance.put(`/comment/updateComment/${data.id}`,{comment:data.comment},{
         headers:{
           "Authorization":`Bearer ${token}`
         }
