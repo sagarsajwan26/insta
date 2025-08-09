@@ -18,7 +18,7 @@ const OtherUserProfile = () => {
   }, [dispatch, id])
 
 
-  const { SearchUserProfile } = useSelector(state => state.user)
+  const { userData,SearchUserProfile } = useSelector(state => state.user)
   const gallery = SearchUserProfile?.posts
 
 
@@ -46,7 +46,8 @@ const OtherUserProfile = () => {
         
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
             <h1 className="text-3xl font-extrabold text-base-content">{SearchUserProfile?.username || "Username"}</h1>
-            <div className="flex gap-3 flex-wrap">
+           { userData._id !== SearchUserProfile._id && (
+             <div className="flex gap-3 flex-wrap">
               <button className="btn btn-primary btn-outline px-6 py-2 text-sm font-semibold rounded-md hover:bg-primary hover:text-white transition">
                 Follow
               </button>
@@ -54,6 +55,7 @@ const OtherUserProfile = () => {
                 Message
               </button>
             </div>
+           ) }
           </div>
 
          

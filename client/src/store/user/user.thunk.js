@@ -115,6 +115,25 @@ export const getOtherUserProfile= createAsyncThunk('/user/getOtherUsersProfile',
         }
 })
 
+const followUnfollow= createAsyncThunk('/user/folowUnfollow',async(id)=>{
+    const token = localStorage.getItem('accessToken')
+    if(!token) return rejectWithValue('no token')
+        try {
+            const res= await axiosInstance.put(`/users/follow/${id}`,{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            })
+       
+            return res.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+
+        }
+
+})
+
+
 // export const getUserProfile= createAsyncThunk("/user/getProfile",async(_,{rejectWithValue})=>{
 // const token =localStorage.getItem('accessToken') 
 //     try {

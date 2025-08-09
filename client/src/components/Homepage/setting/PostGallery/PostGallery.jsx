@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router'
+import { HiPlus } from 'react-icons/hi'
 
 const PostGallery = ({gallery}) => {
   return (

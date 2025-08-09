@@ -12,7 +12,6 @@ const ReelsPosts = ({post}) => {
     const container = containerRef.current
 
     if (container) {
-      console.log(imageRef.current)
 
       container.scrollBy({
         left: -imageRef.current.clientWidth,
@@ -54,7 +53,7 @@ const ReelsPosts = ({post}) => {
       ref={idx === 0 ? imageRef : null}
       src={media.mediaUrl}
       alt="reel"
-      className="h-full max-h-[90vh] w-auto flex-shrink-0 object-contain rounded"
+      className="h-full max-h-[90vh] w-full flex-shrink-0 object-contain rounded"
       draggable={false}
     />
   ) : (
@@ -62,7 +61,7 @@ const ReelsPosts = ({post}) => {
       key={media._id}
       ref={idx === 0 ? imageRef : null}
       controls
-      className="h-full max-h-[90vh] w-auto flex-shrink-0 object-contain rounded"
+      className="h-full max-h-[90vh] w-full flex-shrink-0 object-contain rounded"
       src={media.mediaUrl}
     />
   )

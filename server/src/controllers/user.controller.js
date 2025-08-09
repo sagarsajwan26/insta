@@ -47,7 +47,7 @@ export const userSignup = asyncHandler(async (req, res) => {
     user: newUser._id
   });
 
-  const verifyLink = `http://localhost:5000/api/v1/users/verifyEmail/${verifyEmailToken}`;
+  const verifyLink = `https://insta-lp38.vercel.app/api/v1/users/verifyEmail/${verifyEmailToken}`;
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: newUser.email,
