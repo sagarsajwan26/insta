@@ -64,7 +64,7 @@ export const getComments = asyncHandler(async (req, res) => {
   const post = await Post.findById(postId);
   if (!post) return res.status(404).json({ message: "Post not found or has been deleted" });
 
-  const comments = await Comment.find({ postId }).populate({path:'userId',select:'username fullName profileImg' }).skip(skip).limit(limit).sort({ createdAt: -1 }).lean();
+  const comments = await Comment.find({ postId }).populate({path:'userId',select:'username avatarImage' }).skip(skip).limit(limit).sort({ createdAt: -1 }).lean();
   const count = await Comment.countDocuments({ postId });
 
   return res.status(200).json(new ApiResponse(200, "Comments fetched", { comments, count }));
