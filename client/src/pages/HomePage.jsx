@@ -11,12 +11,12 @@ useEffect(()=>{
 },[])
 
   return (
-    <div className="flex h-screen">
-      <div className="flex-shrink-0">
+    <div className="grid grid-cols-5 ">
+      <div className="col-span-1 ">
         <MenuSidebar />
       </div>
     
-      <main className="flex-1 overflow-hidden">
+      <main className="col-span-4">
         <Outlet />
       </main>
     </div>

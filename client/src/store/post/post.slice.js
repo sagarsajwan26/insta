@@ -18,21 +18,38 @@ const postSlice= createSlice({
             
         })
         builder.addCase(getAllPosts.fulfilled, (state,action)=>{
-            // console.log(action.payload);
             state.allPosts= action.payload.data
         })
 
         builder.addCase(likePost.fulfilled,(state,action)=>{
             console.log(action.payload);
-            const index= state.allPosts.findIndex(post=>post._id ===action.payload.data._id 
-            )
-            console.log(index);
+            const data= action.payload.data
             
-            if(state.allPosts[index].likes.includes(state.user.userData._id)){
-                state.allPosts[index].likes.filter(id=> id!== state.user.userData._id )
-            }{
-                state.allPosts[index].likes.unshift(state.user.userData._id)
+            const index= state.allPosts.findIndex(post=> post._id === data.updatedPost._id )
+            
+            const post= state.allPosts[index]
+
+            
+            
+            if(index!==-1){
+                if(post.likes.includes(data.userId)){
+                    post.likes= post.likes.filter(id=> id!== data.userId)                        
+                }
+                else{
+                post.likes.push(data.userId)
+                    
+                }
             }
+            // if(index !== -1){
+            //     state.allPosts[index]= action.payload.updatedPost
+            // }else{
+            //     if(state.allPosts[index].likes.includes(action.payload.userId)){
+            //         state.allPosts[index].likes.filter(id=> id!==  action.payload.userId)
+            //     }else{
+            //         state.allPosts[index].likes.unshift(action.payload.userId)
+            //     }
+            // }
+          
         })
 
     }

@@ -1,12 +1,20 @@
 import React, { useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { likePost } from '../../../store/post/post.thunk'
+import Comment from './Comment/Comment'
+import { getComments } from '../../../store/comment/comment.thunk'
 
 const ReelsPosts = ({post}) => {
+  
       const [viewFullCaption, setViewFullCaption] = useState(false)
-      const navigate= useNavigate()
+      const [showComments, setShowComments] = useState(false)
+      const navigate= useNavigate() 
 const dispatch= useDispatch()
+const {userData} = useSelector(state=> state.user) 
+
+
+
   const containerRef = useRef()
   const imageRef = useRef()
 
@@ -44,6 +52,13 @@ const dispatch= useDispatch()
             &#8592;
           </button>
 
+          <span
+            onClick={() => navigate(`/Usersprofile/${post.userId._id}`)}
+            className='absolute top-4 left-12 font-semibold text-white text-xs sm:text-sm md:text-base z-30 select-none cursor-pointer'
+          >
+            {post.userId.username}
+          </span>
+
           <div
        ref={containerRef}   
             className='post-scrollbar h-full w-full relative z-0 flex items-center overflow-x-auto  flex-nowrap gap-4'
@@ -68,14 +83,6 @@ const dispatch= useDispatch()
     />
   )
 )}
-
-
-            <span
-              onClick={() => navigate(`/Usersprofile/${post.userId._id}`)}
-              className='absolute top-4 left-12 font-semibold text-white text-xs sm:text-sm md:text-base z-30 select-none'
-            >
-              {post.userId.username}
-            </span>
             <span className='absolute top-4 right-12 font-semibold text-white text-xs sm:text-sm md:text-base z-30 select-none'>
               <button>Follow</button>
             </span>
@@ -91,7 +98,14 @@ const dispatch= useDispatch()
               <span 
               onClick={() => dispatch(likePost(post._id))}
               className='hover:bg-white/40 flex items-center justify-center p-2 rounded-full'>
-                <svg
+             {
+              post.likes.includes(userData._id) ? (
+              <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <g transform="translate(0 -1028.4)">
+  <path d="m7 1031.4c-1.5355 0-3.0784 0.5-4.25 1.7-2.3431 2.4-2.2788 6.1 0 8.5l9.25 9.8 9.25-9.8c2.279-2.4 2.343-6.1 0-8.5-2.343-2.3-6.157-2.3-8.5 0l-0.75 0.8-0.75-0.8c-1.172-1.2-2.7145-1.7-4.25-1.7z" fill="#e74c3c"/>
+ </g>
+</svg>):(
+                   <svg
                   width='20px'
                   height='20px'
                   viewBox='0 0 15 15'
@@ -103,8 +117,15 @@ const dispatch= useDispatch()
                     fill='#ffffff'
                   />
                 </svg>
+              )
+             }
               </span>
-              <span className='hover:bg-white/40 flex items-center justify-center p-2 rounded-full'>
+              <span 
+              onClick={()=> {
+                setShowComments(true)
+                dispatch(getComments(post._id))
+              }}
+              className='hover:bg-white/40 flex items-center justify-center p-2 rounded-full'>
                 <svg
                   fill='#ffffff'
                   width='20px'
@@ -152,6 +173,12 @@ const dispatch= useDispatch()
           >
             &#8594;
           </button>
+              <>
+           {
+            showComments && ( <Comment setShowComments={setShowComments} />)
+           }
+              </>
+
         </div>
         </>
   )

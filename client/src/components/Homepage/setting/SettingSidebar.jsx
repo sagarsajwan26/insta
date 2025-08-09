@@ -188,44 +188,44 @@ const SettingSidebar = () => {
       <Link
         key={idx}
         to={item.to}
-        className="group flex items-center gap-2 lg:gap-3 px-3 lg:px-4 py-2 lg:py-2 rounded-lg hover:bg-primary hover:text-white transition cursor-pointer select-none"
+        className="group flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition cursor-pointer select-none"
         aria-label={item.text}
       >
-        <span className="text-gray-400 group-hover:text-white flex-shrink-0">{item.icon}</span>
-        <span className="font-medium text-sm lg:text-base">{item.text}</span>
+        <span className="text-gray-400 group-hover:text-white">{item.icon}</span>
+        <span className="font-medium">{item.text}</span>
       </Link>
     ))
 
   return (
-    <div className="h-full w-full overflow-y-auto p-4 lg:p-6 bg-base-100 border-r border-base-300">
-      <h1 className="text-2xl lg:text-3xl font-bold mb-4 lg:mb-8 text-primary">Settings</h1>
+    <div className="max-h-screen w-full overflow-y-auto p-6 bg-base-100 border-r border-base-300">
+      <h1 className="text-3xl font-bold mb-8 text-primary">Settings</h1>
 
-      <section className="mb-6 lg:mb-8">
-        <h2 className="text-base lg:text-lg font-semibold mb-2 flex items-center gap-2">
+      <section className="mb-8">
+        <h2 className="text-lg font-semibold mb-2 flex items-center gap-2">
           <span>{icons.user}</span> Meta
         </h2>
-        <h3 className="text-sm lg:text-base font-semibold mb-1">Account Center</h3>
-        <p className="mb-3 lg:mb-4 text-xs lg:text-sm text-base-content/70">
+        <h3 className="text-base font-semibold mb-1">Account Center</h3>
+        <p className="mb-4 text-sm text-base-content/70">
           Manage your connected experience and account settings across Meta technologies
         </p>
         <div>{renderLinks(metaDiv)}</div>
-        <p className="mt-2 lg:mt-3 text-xs lg:text-sm text-primary cursor-pointer hover:underline">
+        <p className="mt-3 text-sm text-primary cursor-pointer hover:underline">
           See More in Accounts Center
         </p>
       </section>
 
-      <section className="mb-6 lg:mb-8">
-        <h2 className="text-base lg:text-lg font-semibold mb-3 lg:mb-4">Here you use Instagram</h2>
+      <section className="mb-8">
+        <h2 className="text-lg font-semibold mb-4">Here you use Instagram</h2>
         <div>{renderLinks(UserInstagram)}</div>
       </section>
 
-      <section className="mb-6 lg:mb-8">
-        <h2 className="text-base lg:text-lg font-semibold mb-3 lg:mb-4">Who can see your context</h2>
+      <section className="mb-8">
+        <h2 className="text-lg font-semibold mb-4">Who can see your context</h2>
         <div>{renderLinks(context)}</div>
       </section>
 
-      <section className="mb-6 lg:mb-8">
-        <h2 className="text-base lg:text-lg font-semibold mb-3 lg:mb-4">How others can interact with you</h2>
+      <section className="mb-8">
+        <h2 className="text-lg font-semibold mb-4">How others can interact with you</h2>
         <div>{renderLinks(interact)}</div>
       </section>
     </div>

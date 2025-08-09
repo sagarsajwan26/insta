@@ -54,6 +54,8 @@ export const getAllPosts= createAsyncThunk('/user/getAllPosts',async()=>{
 })
 
 export const likePost= createAsyncThunk('/post/likePost',async(id)=>{
+
+  
   const token = localStorage.getItem('accessToken')
   try {
     const res= await axiosInstance.get(`/post/likePost/${id}`,{
@@ -61,6 +63,8 @@ export const likePost= createAsyncThunk('/post/likePost',async(id)=>{
         Authorization:`Bearer ${token}`
       }
     })
+    // console.log(res);
+    
     return res.data
   } catch (error) {
     console.log(error);

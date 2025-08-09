@@ -65,36 +65,35 @@ const MenuSidebar = () => {
   const location = useLocation()
 
   return (
-    <div className="bg-base-200 text-white h-screen w-16 lg:w-60 flex flex-col p-2 lg:p-4 overflow-y-auto border-r border-gray-700">
+    <div className="sticky top-0 bg-base-200 text-white min-h-screen w-16 md:w-60 flex flex-col p-3 md:p-4 overflow-y-auto">
       
       {/* Logo */}
-      <div className="mb-4 lg:mb-6 flex justify-center lg:justify-start">
-        <img src="/InstaLogo.png" alt="Logo" className="block lg:hidden h-8 w-auto" />
-        <img src="/logo.png" alt="Logo" className="hidden lg:block h-10 w-auto" />
+      <div className="mb-6 flex justify-center md:justify-start">
+        <img src="/InstaLogo.png" alt="Logo" className="block md:hidden h-10 w-auto" />
+        <img src="/logo.png" alt="Logo" className="hidden md:block h-10 w-auto" />
       </div>
 
       {/* Navigation */}
-      <nav className="flex flex-col space-y-2 lg:space-y-3">
+      <nav className="flex flex-col space-y-3">
         {navlinks.map((item, idx) => (
           <Link
             key={idx}
             to={item.to}
-            className={`flex items-center justify-center lg:justify-start px-2 lg:px-3 py-2 lg:py-3 rounded-md transition-colors cursor-pointer 
+            className={`flex items-center justify-center md:justify-start px-2 md:px-3 py-2 rounded-md transition-colors cursor-pointer 
               ${location.pathname === item.to ? 'bg-primary text-white font-semibold' : 'hover:bg-primary hover:text-white'}
             `}
             aria-current={location.pathname === item.to ? 'page' : undefined}
-            title={item.name}
           >
             {item.icon}
-            <span className="hidden lg:inline ml-3 font-semibold">{item.name}</span>
+            <span className="hidden md:inline ml-3 font-semibold">{item.name}</span>
           </Link>
         ))}
       </nav>
 
       {/* Bottom settings */}
-      <div className="mt-auto pt-3 lg:pt-4 border-t border-gray-400 relative">
+      <div className="mt-auto pt-4 border-t border-gray-400 relative">
         {showSetting && (
-          <div className="absolute bottom-12 left-0 lg:left-auto lg:right-0 bg-zinc-800 p-3 lg:p-4 rounded-md shadow-lg w-48 lg:w-56 flex flex-col space-y-2 lg:space-y-3 z-20">
+          <div className="absolute bottom-12 left-0 bg-zinc-800 p-4 rounded-md shadow-lg w-48 md:w-56 flex flex-col space-y-3 z-20">
             <Link
               to="/setting"
               onClick={() => setShowSetting(false)}
@@ -118,13 +117,12 @@ const MenuSidebar = () => {
         <button
           onClick={() => setShowSetting(!showSetting)}
           aria-label="Toggle settings menu"
-          title="More"
-          className="flex items-center justify-center lg:justify-start hover:bg-primary px-2 lg:px-3 py-2 lg:py-3 rounded-md transition-colors w-full"
+          className="flex items-center justify-center md:justify-start hover:bg-primary px-2 md:px-3 py-2 rounded-md transition-colors w-full"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="white">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-          <span className="hidden lg:inline ml-3 font-semibold">More</span>
+          <span className="hidden md:inline ml-3 font-semibold">More</span>
         </button>
       </div>
     </div>

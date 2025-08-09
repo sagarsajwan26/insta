@@ -5,6 +5,8 @@ import ReelsPosts from './Reels/ReelsPosts'
 const Reels = () => {
   const icons = [1, 2, 3, 4, 5]
   const { allPosts } = useSelector(state => state.post)
+  console.log(allPosts);
+  
   const navigate = useNavigate()
 
   if (!allPosts) {
