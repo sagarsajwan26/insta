@@ -11,7 +11,7 @@ const Search = () => {
 
   const {searchUsers}= useSelector(state=> state.user)
 
-  console.log(searchUsers);
+  // console.log(searchUsers);
   
   const onSearch = (e) => {
     e.preventDefault()

@@ -57,6 +57,12 @@ builder.addCase(getOtherUserProfile.fulfilled, (state,action)=>{
 
 builder.addCase(followUnfollow.fulfilled,(state, action)=>{
     console.log(action.payload);
+    if(action.payload.message==='unfollowed'){
+state.SearchUserProfile.followers= state.SearchUserProfile.followers.filter((id)=> id!== state.userData._id)
+
+    }else {
+        state.SearchUserProfile.followers.unshift(state.userData._id)
+    }
     
     // state.SearchUserProfile= action.payload.data
 })

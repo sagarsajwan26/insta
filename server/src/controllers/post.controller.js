@@ -127,7 +127,7 @@ export const likePost = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, message, updatedPost));
+    .json(new ApiResponse(200, message, {updatedPost,userId}));
 });
 
 export const getAllPosts = asyncHandler(async (req, res) => {

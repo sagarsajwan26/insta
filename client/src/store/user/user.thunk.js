@@ -106,7 +106,7 @@ export const getOtherUserProfile= createAsyncThunk('/user/getOtherUsersProfile',
                     'Authorization':`Bearer ${token}`
                 }
             })
-            console.log(res);
+            // console.log(res);
             
             return res.data
         } catch (error) {

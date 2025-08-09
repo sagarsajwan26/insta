@@ -41,7 +41,7 @@ function LoginSignupPage() {
     }else{
       
       dispatch(loginThunk(loginForm)).then(res=> {
-        console.log(res);
+        // console.log(res);
         if(res.meta.rejectedWithValue){
           toast.error(res.payload.message)
         }

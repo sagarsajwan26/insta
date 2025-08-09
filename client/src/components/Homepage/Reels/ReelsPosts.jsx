@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
+import { likePost } from '../../../store/post/post.thunk'
 
 const ReelsPosts = ({post}) => {
       const [viewFullCaption, setViewFullCaption] = useState(false)
       const navigate= useNavigate()
-
+const dispatch= useDispatch()
   const containerRef = useRef()
   const imageRef = useRef()
 
@@ -86,7 +88,9 @@ const ReelsPosts = ({post}) => {
                 : post.caption.slice(0, 30) + '...'}
             </span>
             <span className='absolute bottom-4 right-12 flex flex-col z-30 select-none'>
-              <span className='hover:bg-white/40 flex items-center justify-center p-2 rounded-full'>
+              <span 
+              onClick={() => dispatch(likePost(post._id))}
+              className='hover:bg-white/40 flex items-center justify-center p-2 rounded-full'>
                 <svg
                   width='20px'
                   height='20px'

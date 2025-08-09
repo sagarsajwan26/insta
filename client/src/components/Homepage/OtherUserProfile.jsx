@@ -21,6 +21,7 @@ const OtherUserProfile = () => {
   const { userData,SearchUserProfile } = useSelector(state => state.user)
   const gallery = SearchUserProfile?.posts
 
+// console.log(SearchUserProfile);
 
 
   if(loading) return <div>Loading</div>
@@ -49,7 +50,7 @@ const OtherUserProfile = () => {
            { userData._id !== SearchUserProfile._id && (
              <div className="flex gap-3 flex-wrap">
               <button onClick={()=> dispatch(followUnfollow(SearchUserProfile._id))} className="btn btn-primary btn-outline px-6 py-2 text-sm font-semibold rounded-md hover:bg-primary hover:text-white transition">
-                Follow
+                {SearchUserProfile?.followers.includes(userData._id) ? "Unfollow" : "Follow" + (SearchUserProfile?.followers.includes(userData._id) ? "ing" : "")}
               </button>
               <button className="btn btn-secondary btn-outline px-6 py-2 text-sm font-semibold rounded-md hover:bg-secondary hover:text-white transition">
                 Message
