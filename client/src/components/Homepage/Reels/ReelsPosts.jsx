@@ -175,7 +175,7 @@ const {userData} = useSelector(state=> state.user)
           </button>
               <>
            {
-            showComments && ( <Comment setShowComments={setShowComments} />)
+            showComments && ( <Comment setShowComments={setShowComments} postId={post._id} />)
            }
               </>
 

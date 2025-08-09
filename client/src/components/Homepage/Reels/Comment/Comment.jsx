@@ -1,10 +1,38 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import DummyComments from './DummyComments'
 import SingleComment from './SingleComment'
+import { useState } from 'react'
+import { addComment } from '../../../../store/comment/comment.thunk'
 
-const Comment = ({ setShowComments }) => {
+
+const Comment = ({ setShowComments ,postId}) => {
+  console.log(postId);
+  
+  
   const { comments } = useSelector(state => state.comment)
+  const [comment, setComment] = useState('')
+  const [loading, setLoading]= useState(false)
+  const dispatch= useDispatch()  
+  const [addOrUpdateState, setAddOrUpdateState]= useState(true)
+  const handleComment= async(e)=>{
+    e.preventDefault()
+    setLoading(true)
+    if(addOrUpdateState){
+      dispatch(addComment({postId,comment})).then((res)=>{
+        console.log(res);
+        
+        setLoading(false)
+      })
+      
+    }else {
+      console.log('hi');
+      loading(false)
+      
+    }
+
+  }
+
 
   return (
     <div className="absolute bottom-0 left-0 w-full h-[70vh] bg-base-200 rounded-t-xl shadow-lg flex flex-col z-30">
@@ -34,7 +62,7 @@ const Comment = ({ setShowComments }) => {
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {!comments ? (
           <DummyComments />
-        ) : comments.length > 0 ? (
+        ) : comments.length <=0 ? (
           <div className="flex flex-col items-center justify-center h-full text-base-content/70">
             <p className="text-center font-medium">No Comments yet</p>
             <p className="text-sm">Be the first to add one!</p>
@@ -46,14 +74,16 @@ const Comment = ({ setShowComments }) => {
         )}
       </div>
 
-      <form className="border-t border-base-300 p-3 flex gap-2">
+      <form onSubmit={handleComment} className="border-t border-base-300 p-3 flex gap-2">
         <input
+        value={comment}
+        onChange={(e)=> setComment(e.target.value)}
           type="text"
           placeholder="Add a comment..."
           className="input input-bordered w-full input-sm"
         />
-        <button type="submit" className='btn btn-primary'>
-          Add Comment
+        <button disabled={loading} type="submit" className='btn btn-primary'>
+         {addOrUpdateState ? "add Comment":"Update Comment"}
         </button>
       </form>
     </div>
