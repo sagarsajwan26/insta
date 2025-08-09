@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router'
-import { getOtherUserProfile } from '../../store/user/user.thunk'
+import { followUnfollow, getOtherUserProfile } from '../../store/user/user.thunk'
 import PostGallery from './setting/PostGallery/PostGallery'
 
 const OtherUserProfile = () => {
@@ -48,7 +48,7 @@ const OtherUserProfile = () => {
             <h1 className="text-3xl font-extrabold text-base-content">{SearchUserProfile?.username || "Username"}</h1>
            { userData._id !== SearchUserProfile._id && (
              <div className="flex gap-3 flex-wrap">
-              <button className="btn btn-primary btn-outline px-6 py-2 text-sm font-semibold rounded-md hover:bg-primary hover:text-white transition">
+              <button onClick={()=> dispatch(followUnfollow(SearchUserProfile._id))} className="btn btn-primary btn-outline px-6 py-2 text-sm font-semibold rounded-md hover:bg-primary hover:text-white transition">
                 Follow
               </button>
               <button className="btn btn-secondary btn-outline px-6 py-2 text-sm font-semibold rounded-md hover:bg-secondary hover:text-white transition">

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import {  getOtherUserProfile, getSearchUsers, loginThunk, signupThunk, updataUserInfo, UpdateProfilePic } from "./user.thunk"
+import {  followUnfollow, getOtherUserProfile, getSearchUsers, loginThunk, signupThunk, updataUserInfo, UpdateProfilePic } from "./user.thunk"
 
 const initialState={
     isAuthenticated:false,
@@ -53,6 +53,12 @@ builder.addCase(updataUserInfo.fulfilled,(state, action)=>{
 builder.addCase(getOtherUserProfile.fulfilled, (state,action)=>{
     state.SearchUserProfile= action.payload.data
 
+})
+
+builder.addCase(followUnfollow.fulfilled,(state, action)=>{
+    console.log(action.payload);
+    
+    // state.SearchUserProfile= action.payload.data
 })
 
     }

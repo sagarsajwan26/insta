@@ -12,7 +12,7 @@ router.route('/logout').get(userAuth,logout)
 // router.route('/getProfile').get(userAuth, getUserProfile)
 router.route('/updateUserInfo').put(userAuth,updateUser)
 router.route('/updateProfilePic').put(userAuth,upload.single('avatar'),updateProfilePic)
-router.route('/follow/:id').put(userAuth,followUnfollowUser)
+router.route('/follow/:id').get(userAuth,followUnfollowUser)
 router.route('/searchUser').get(userAuth, getSearchUser)
 router.route('/getOtherUsersProfile/:id').get(userAuth, getOtherUserProfile)
 

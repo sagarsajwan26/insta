@@ -6,32 +6,7 @@ const Reels = () => {
   const icons = [1, 2, 3, 4, 5]
   const { allPosts } = useSelector(state => state.post)
   const navigate = useNavigate()
-  const [viewFullCaption, setViewFullCaption] = useState(false)
 
-  const containerRef = useRef()
-  const imageRef = useRef()
-
-  const scrollLeft = () => {
-    const container = containerRef.current
-
-    if (container) {
-      console.log(imageRef.current)
-
-      container.scrollBy({
-        left: -imageRef.current.clientWidth,
-        behavior: 'smooth'
-      })
-    }
-  }
-  const scrollRight = () => {
-    const container = containerRef.current
-    if (container) {
-      container.scrollBy({
-        left: imageRef.current.clientWidth,
-        behavior: 'smooth'
-      })
-    }
-  }
   if (!allPosts) {
     return <div className='text-white text-center py-10'>Loading...</div>
   }
