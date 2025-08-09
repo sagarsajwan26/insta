@@ -125,7 +125,6 @@ export const followUnfollow= createAsyncThunk('/user/folowUnfollow',async(id)=>{
                     'Authorization':`Bearer ${token}`
                 }
             })
-            console.log(res.data );
             
             return res.data
         } catch (error) {

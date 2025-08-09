@@ -166,7 +166,7 @@ export const followUnfollowUser = asyncHandler(async (req, res) => {
 
   await Promise.all(ops);
 
-  return res.status(200).json(new ApiResponse(200,userId ,ifFollowing ? "unfollowed" : "following"));
+  return res.status(200).json(new ApiResponse(200 ,ifFollowing ? "unfollowed" : "following",userId ));
 });
 export const getSearchUser= asyncHandler(async(req,res)=>{
   const {username}= req.query
