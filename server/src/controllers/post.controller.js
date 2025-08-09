@@ -92,10 +92,10 @@ export const getUserPosts = asyncHandler(async (req, res) => {
     .skip(skip)
     .sort({ createdAt: -1 })
     .lean();
-const count= await Post.countDocuments()
+
   return res
     .status(200)
-    .json(new ApiResponse(200, "Posts fetched successfully", {posts, count}));
+    .json(new ApiResponse(200, "Posts fetched successfully", posts));
 });
 
 export const likePost = asyncHandler(async (req, res) => {
@@ -143,8 +143,9 @@ export const getAllPosts = asyncHandler(async (req, res) => {
     .limit(limit)
     .sort({ createdAt: -1 })
     .lean();
+    const count= await Post.countDocuments()
 
   return res
     .status(200)
-    .json(new ApiResponse(200, "Posts fetched", posts));
+    .json(new ApiResponse(200, "Posts fetched", {posts, count}));
 });
