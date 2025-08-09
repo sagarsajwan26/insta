@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getComments } from "./comment.thunk"
+import { addComment, getComments } from "./comment.thunk"
 
 const initialState={
     comments:null,
@@ -17,6 +17,11 @@ const commentSlice= createSlice({
             state.count= action.payload.count
             
         })
+
+        builder.addCase(addComment.fulfilled,(state,action)=>{
+            console.log(action.payload);
+            
+                })
     }
 
 })

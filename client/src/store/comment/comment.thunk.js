@@ -31,6 +31,7 @@ export const addComment= createAsyncThunk('/post/addComment',async(data, {reject
 })
 
 export const deleteComment= createAsyncThunk('/post/deleteComment',async(id, {rejectWithValue})=>{
+
   const token = localStorage.getItem('accessToken')
   try {
     const res= await axiosInstance.delete(`/comment/deleteComment/${id}`,{
@@ -38,6 +39,8 @@ export const deleteComment= createAsyncThunk('/post/deleteComment',async(id, {re
         Authorization:`Bearer ${token}`
       }
     })
+    console.log(res);
+    
     return res.data.data
   } catch (error) {
     return rejectWithValue(error.response.data)

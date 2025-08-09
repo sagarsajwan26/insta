@@ -21,8 +21,12 @@ export const addComment = asyncHandler(async (req, res) => {
   await Post.findByIdAndUpdate(postId, {
     $push: { comments: newComment._id }
   });
+  const newCmnt= await Comment.findById(newComment._id).populate({
+    path:"userId",
+    select:"username avatarUrl"
+  }).lean()
 
-  return res.status(201).json(new ApiResponse(201, 'Comment added successfully', { newComment, post }));
+  return res.status(201).json(new ApiResponse(201, 'Comment added successfully', { newComment:newCmnt, post }));
 });
 
 export const editComment = asyncHandler(async (req, res) => {
@@ -64,7 +68,7 @@ export const getComments = asyncHandler(async (req, res) => {
   const post = await Post.findById(postId);
   if (!post) return res.status(404).json({ message: "Post not found or has been deleted" });
 
-  const comments = await Comment.find({ postId }).populate({path:'userId',select:'username avatarImage' }).skip(skip).limit(limit).sort({ createdAt: -1 }).lean();
+  const comments = await Comment.find({ postId }).populate({path:'userId',select:'username avatarUrl' }).skip(skip).limit(limit).sort({ createdAt: -1 }).lean();
   const count = await Comment.countDocuments({ postId });
 
   return res.status(200).json(new ApiResponse(200, "Comments fetched", { comments, count }));

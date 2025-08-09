@@ -1,7 +1,9 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteComment } from '../../../../store/comment/comment.thunk'
 
 const SingleComment = ({ comment }) => {
+  const dispatch= useDispatch()
   const { userData } = useSelector(state => state.user)
 
   return (
@@ -46,7 +48,7 @@ const SingleComment = ({ comment }) => {
               <button className="btn btn-secondary btn-sm w-full text-white">Edit</button>
             </li>
             <li>
-              <button className="btn btn-error btn-sm w-full text-white">Delete</button>
+              <button onClick={()=> dispatch(deleteComment(comment._id)) } className="btn btn-error btn-sm w-full text-white">Delete</button>
             </li>
           </ul>
         </div>
